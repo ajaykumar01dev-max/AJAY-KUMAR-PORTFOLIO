@@ -1,3 +1,16 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faFacebook,
+  faTwitter,
+  faInstagram,
+  faLinkedin,
+  faGithub,
+} from "@fortawesome/free-brands-svg-icons";
+import { 
+  faLocationDot, 
+  faEnvelope 
+} from "@fortawesome/free-solid-svg-icons";
+
 export default function Contact() {
   return (
     <section id="contact" className="bg-white w-full py-20">
@@ -15,7 +28,7 @@ export default function Contact() {
             </h2>
             <div className="flex items-center gap-4 bg-gray-50 p-5 rounded-xl border border-gray-200 mb-5">
               <div className="w-12 h-12 bg-purple-100 text-purple-600 flex items-center justify-center rounded-xl text-xl">
-                ✉️
+                <FontAwesomeIcon icon={faEnvelope} />
               </div>
               <div>
                 <p className="text-sm text-gray-500 font-medium">Email</p>
@@ -24,7 +37,7 @@ export default function Contact() {
             </div>
             <div className="flex items-center gap-4 bg-gray-50 p-5 rounded-xl border border-gray-200 mb-8">
               <div className="w-12 h-12 bg-purple-100 text-purple-600 flex items-center justify-center rounded-xl text-xl">
-                📍
+                <FontAwesomeIcon icon={faLocationDot} />
               </div>
               <div>
                 <p className="text-sm text-gray-500 font-medium">Location</p>
@@ -34,19 +47,37 @@ export default function Contact() {
             <h3 className="text-lg font-semibold text-gray-800 mb-3">
               Social Links
             </h3>
-            <div className="flex gap-4">
-              <button className="w-10 h-10 border rounded-lg flex justify-center items-center text-gray-700 hover:bg-gray-100">
-                🐱
-              </button>
-              <button className="w-10 h-10 border rounded-lg flex justify-center items-center text-gray-700 hover:bg-gray-100">
-                💼
-              </button>
-              <button className="w-10 h-10 border rounded-lg flex justify-center items-center text-gray-700 hover:bg-gray-100">
-                🐦
-              </button>
+            <div className="flex gap-4 mt-4">
+              {[
+                { icon: faFacebook, color: "#1877F2" },
+                { icon: faTwitter, color: "#1DA1F2" },
+                { icon: faInstagram, color: "#E4405F" },
+                { icon: faLinkedin, color: "#0A66C2" },
+                { icon: faGithub, color: "#000000" },
+              ].map((item, index) => (
+                <button
+                  key={index}
+                  className="w-11 h-11 border border-gray-30 rounded-xl flex justify-center items-center bg-white shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 hover:border-transparent hover:bg-opacity-90"
+                  style={{
+                    boxShadow: "0 2px 6px rgba(0,0,0,0.08)",
+                  }}
+                >
+                  <FontAwesomeIcon
+                    icon={item.icon}
+                    size="lg"
+                    className="transition-all duration-300"
+                    style={{
+                      color: item.color,
+                      filter: "drop-shadow(0px 1px 2px rgba(0,0,0,0.2))",
+                    }}
+                  />
+                </button>
+              ))}
             </div>
+
+
           </div>
-          <div className="bg-white border border-gray-200 shadow-md rounded-2xl p-8">
+          <div className="bg-white border border-gray-200 shadow-md rounded-2xl p-8">            
             <div className="mb-4">
               <label className="text-sm text-gray-600 font-medium">Name</label>
               <input
@@ -72,7 +103,7 @@ export default function Contact() {
               ></textarea>
             </div>
             <button className="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition flex items-center justify-center gap-2">
-              <span>📨</span> Send Message
+              <span><FontAwesomeIcon icon={faEnvelope} /></span> Send Message
             </button>
           </div>
         </div>

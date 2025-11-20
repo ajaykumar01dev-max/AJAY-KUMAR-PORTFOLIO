@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+import { config } from "@fortawesome/fontawesome-svg-core";
+config.autoAddCss = false;
 import "./globals.css";
 import NavBar from "./components/NavBar";
 import Footer from "./footer/page";
@@ -15,9 +18,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("http://localhost:3000"), // ✅ FIX
+
   title: "Ajay Kumar | Full Stack Developer Portfolio",
   description:
     "Portfolio of Ajay Kumar, a Full Stack Developer skilled in MERN Stack, JavaScript, React, Next.js, MySQL, and modern web development. Explore projects, experience, skills, and contact information.",
+
   keywords: [
     "Ajay Kumar",
     "Full Stack Developer",
@@ -29,9 +35,11 @@ export const metadata: Metadata = {
     "Frontend Developer",
     "Backend Developer",
   ],
+
   authors: [{ name: "Ajay Kumar" }],
   creator: "Ajay Kumar",
   publisher: "Ajay Kumar",
+
   openGraph: {
     title: "Ajay Kumar | Full Stack Developer Portfolio",
     description:
@@ -40,7 +48,7 @@ export const metadata: Metadata = {
     siteName: "Ajay Kumar Portfolio",
     images: [
       {
-        url: "/og-image.png", 
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "Ajay Kumar Portfolio Preview",
@@ -50,6 +58,7 @@ export const metadata: Metadata = {
     type: "website",
   },
 };
+
 
 
 export default function RootLayout({

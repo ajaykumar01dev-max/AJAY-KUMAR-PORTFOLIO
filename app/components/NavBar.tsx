@@ -13,16 +13,17 @@ export default function NavBar() {
     { href: "#about", label: "About Me" },
     { href: "#project", label: "Projects" },
     { href: "#contact", label: "Contact" },
+    { href: "#blogs", label: "Blog" },
   ];
 
   // Smooth scroll
-  const handleScroll = (e:any, href:any) => {
+  const handleScroll = (e: any, href: any) => {
     e.preventDefault();
     const section = document.querySelector(href);
     setOpen(false);
 
     if (section) {
-      const offset = section.offsetTop - 60; // Adjust for navbar height
+      const offset = section.offsetTop - 50;
       window.scrollTo({
         top: offset,
         behavior: "smooth",
@@ -56,9 +57,9 @@ export default function NavBar() {
 
         {/* Logo */}
         <div className="text-2xl text-[#1c6bff] font-extrabold cursor-pointer">
-          <a href="#hero" onClick={(e) => handleScroll(e, "#hero")}>
+          <Link href="#hero" onClick={(e) => handleScroll(e, "#hero")}>
             AJAY KUMAR
-          </a>
+          </Link>
         </div>
 
         {/* Desktop Menu */}
@@ -66,18 +67,14 @@ export default function NavBar() {
           {menuItems.map((item) => {
             const isActive = active === item.href;
             return (
-              <li key={item.href} className="relative group">
-                <a
+              <li key={item.href} className="relative group cursor-pointer">
+                <Link
                   href={item.href}
                   onClick={(e) => handleScroll(e, item.href)}
                   className="relative py-1 transition-all duration-300 group-hover:text-[#1c6bff]"
                 >
                   {item.label}
-
-                  {/* Hover underline */}
                   <span className="absolute left-0 -bottom-1 h-0.5 w-0 bg-[#1c6bff] rounded-full transition-all duration-300 group-hover:w-full"></span>
-
-                  {/* Active underline */}
                   {isActive && (
                     <motion.span
                       layoutId="activeUnderline"
@@ -86,83 +83,94 @@ export default function NavBar() {
                       animate={{ width: "100%" }}
                     />
                   )}
-                </a>
+                </Link>
               </li>
             );
           })}
         </ul>
 
-        {/* Resume Button */}
         <div className="hidden md:block">
-          <button className="bg-[#1c6bff] text-white px-5 py-2 rounded-full shadow-xl font-semibold hover:bg-[#124ecb] transition">
-            Resume
-          </button>
+          <Link href="resume.pdf">
+            <button className="bg-[#1c6bff] text-white px-5 py-2 rounded-full cursor-pointer shadow-xl font-semibold hover:bg-[#124ecb] transition">
+              Resume
+            </button>
+          </Link>
         </div>
 
-        {/* Hamburger */}
         <button
           className="md:hidden w-10 h-10 flex items-center justify-center relative"
           onClick={() => setOpen(!open)}
         >
           <span
-            className={`absolute h-0.5 w-6 bg-[#1c6bff] transition-all ${
-              open ? "rotate-45" : "-translate-y-2"
-            }`}
+            className={`absolute h-0.5 w-6 bg-[#1c6bff] transition-all ${open ? "rotate-45" : "-translate-y-2"
+              }`}
           />
           <span
-            className={`absolute h-0.5 w-6 bg-[#1c6bff] transition-all ${
-              open ? "opacity-0" : "opacity-100"
-            }`}
+            className={`absolute h-0.5 w-6 bg-[#1c6bff] transition-all ${open ? "opacity-0" : "opacity-100"
+              }`}
           />
           <span
-            className={`absolute h-0.5 w-6 bg-[#1c6bff] transition-all ${
-              open ? "-rotate-45" : "translate-y-2"
-            }`}
+            className={`absolute h-0.5 w-6 bg-[#1c6bff] transition-all ${open ? "-rotate-45" : "translate-y-2"
+              }`}
           />
         </button>
       </div>
 
-      {/* Mobile Menu */}
       <div
-        className={`md:hidden bg-[#f3f3ff] overflow-hidden transition-all duration-300 ${
-          open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-        }`}
+        className={`md:hidden bg-[#f3f3ff] overflow-hidden transition-all duration-300 ${open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+          }`}
       >
-        <ul className="flex flex-col items-center gap-6 py-6 text-[16px] font-medium">
+        <ul className="flex flex-col items-center gap-5 py-8 text-[17px] font-medium">
+
           {menuItems.map((item, index) => {
             const isActive = active === item.href;
+
             return (
               <motion.li
                 key={item.href}
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: open ? 1 : 0, y: open ? 0 : -10 }}
-                transition={{ delay: index * 0.1 }}
+                transition={{ delay: index * 0.07, duration: 0.35 }}
+                className="w-full flex justify-center"
               >
-                <a
+                <Link
                   href={item.href}
                   onClick={(e) => handleScroll(e, item.href)}
-                  className={`block px-4 py-2 ${
-                    isActive ? "text-[#1c6bff] font-semibold" : "text-gray-800"
-                  }`}
+                  className={`
+            relative block px-4 py-1 rounded-md transition-all
+            ${isActive ? "text-[#1c6bff] font-semibold" : "text-gray-700 hover:text-[#1c6bff]"}
+          `}
                 >
                   {item.label}
-                </a>
-                {isActive && (
-                  <motion.div
-                    layoutId="mobileUnderline"
-                    className="h-[3px] bg-[#1c6bff] w-full rounded-full mt-1"
-                  />
-                )}
+
+                  {/* Underline */}
+                  {isActive && (
+                    <motion.div
+                      layoutId="mobileUnderline"
+                      className="h-[3px] bg-[#1c6bff] w-full rounded-full mt-1"
+                    />
+                  )}
+                </Link>
               </motion.li>
             );
           })}
 
+          {/* RESUME BUTTON */}
           <li>
-            <button className="bg-[#1c6bff] text-white px-6 py-2 rounded-full shadow-xl">
-              Download Resume
-            </button>
+            <Link href="resume.pdf" target="_blank">
+              <button
+                className="
+          bg-[#1c6bff] text-white px-6 py-2.5 rounded-full font-semibold shadow-md
+          hover:bg-[#0f52c7] hover:shadow-lg transition-all active:scale-95
+        "
+              >
+                Download Resume
+              </button>
+            </Link>
           </li>
+
         </ul>
+
       </div>
     </nav>
   );
